@@ -19,13 +19,12 @@ const App = () => (
     <Router>
       <Header />
       <Switch>
-      <Route path="/" exact component={PostList} />
         <Route path="/posts" exact component={PostList} />
         <Route path="/posts/:id" component={Post} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/new" exact component={NewPost} />
-        <Route path ="/edit/:id" exact component={EditPost}/>
+        <Route path="/edit/:id" exact component={EditPost} />
       </Switch>
 
     </Router>
