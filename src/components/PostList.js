@@ -1,69 +1,91 @@
-import React, { lazy, Suspense } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
-const Post = lazy(() => import("./Post"));
+import { Link } from 'react-router-dom';
+import blogpen from './blogpen.png';
 
-const baseURL = "https://aalyablogapp.herokuapp.com/server/posts/";
 
-const loader = () => (
-    <div className="container-spin">
-        <div className="spinner-border" role="status">
-            <span className="sr-only">Loading...</span>
-        </div>
-    </div>
-)
 
-class PostList extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            posts: [],
-            //set the number of recent posts to be rendered to 5
-            noOfPosts: 5,
+const PostList = () => {
+    const [posts, setPosts] = useState([]);
+
+
+    useEffect(() => {
+        const getPosts = async () => {
+            const postCol = await axios.get(`https://aalyablogapp.herokuapp.com/server/posts/`)
+            setPosts(postCol.data.reverse())
+
         }
+        getPosts();
+    }, [])
+
+    const renderPosts = () => {
+        return posts.map((post, i) => {
+
+            return (
+                <li className="mb-6" key={i}>
+
+                    <Link to={`/posts/${post._id}`} className="hidden sm:flex sm:bg-white sm:shadow-md sm:mx-6">
+
+                        <div className="sm:block sm:flex">
+                            <img className="h-32" src={blogpen} alt="a pen" />
+                        </div>
+                        <div className="sm:flex-col justify-between ml-4 center">
+                            <h3 className="font-bold text-xl text-pink-500">{post.author}  </h3>
+                            <h2 className="font-bold text-xl">{post.title}</h2>
+                            <p className="text-gray-700">{post.date}</p>
+                        </div>
+                        <div className="sm:flex sm:items-center sm:ml-auto ">
+                            {
+                                post.tags ?
+                                    post.tags.map((tag, index) =>
+                                        <span key={index} className="text-orange-500 bg-orange-100 font-bold m-4 p-2 rounded">{tag}</span>
+                                    ) : ""
+                            }
+                        </div>
+                    </Link>
+
+{/* when the screen is smaller than sm */}
+                    <Link to={`/posts/${post._id}`} className="bg-white shadow-md mx-6 sm:hidden">
+
+                        <div className="flex ">
+                            <div>
+                            <img className="h-32" src={blogpen} alt="a pen" />
+                        </div>
+                        <div className="flex-col justify-between ml-6 center">
+                            
+                            <h2 className="font-bold text-xl">{post.title}</h2>
+                            <div className="flex space-between ">
+                            {
+                                post.tags ?
+                                    post.tags.map((tag, index) =>
+                                        <span key={index} className="text-orange-500 bg-orange-100 font-bold p-2 rounded">{tag}</span>
+                                    ) : ""
+                            }
+                        </div>
+                        <p className="font-bold text-l text-pink-500">{post.author}  </p>
+                            <p className="text-gray-700">{post.date}</p>
+                        </div>
+                        </div>
+
+                    </Link>
+
+                </li>
+            )
+        })
     }
-    componentDidMount() {
-        axios.get(`${baseURL}`)
-            .then((response) => {
-                this.setState({ posts: response.data.reverse() })
+    return (
+        <div className="post-list">
+            <h1 className="ml-6 text-3xl text-pink-800">Latest Posts</h1>
+            {posts.length === 0 ? (
+                <p className="ml-6">Loading blog posts...</p>
+            ) : (
+                    <ul className="ml-6">{renderPosts()}</ul>
+                )}
 
-                //hide spinner
-                document.querySelector(".spinner-border").style.display = "none";
-            })
-            .catch((err) => console.error(err))
-    }
-    render() {
-        return (
-            <div className="post-list">
-                <h1>Latest Posts</h1>
 
-                {/* display spinner */}
-                <div className="container-spin">
-                    <div className="spinner-border" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </div>
-                </div>
-
-                {this.state.posts
-                    .slice(0, this.state.noOfPosts)
-                    .map((currentPost) => (
-                        <Suspense
-                            key={currentPost._id} fallback={loader()}>
-                            <Post post={currentPost} />
-                        </Suspense>
-                    ))}
-
-                {/* to load more post */}
-                {this.state.posts[this.state.noOfPosts] ? (
-                    <button className="btn btn-link" onClick={() =>
-                        this.setState({
-                            noOfPosts: this.state.noOfPosts + 3,
-                        })}>Show more posts...</button>) : (
-                        ""
-                    )}
-
-            </div>
-        );
-    }
+        </div>
+    )
 }
+
 
 export default PostList;

@@ -48,7 +48,7 @@ export default class Register extends React.Component {
             let count = 0;
             if (loginRes) {
                 sessionStorage.setItem("isLoggedIn", "true");
-                sessionStorage.setItem("user", loginRes.data.user.id);
+                sessionStorage.setItem("user", loginRes.data.user.displayName);
                 count++;
                 this.setState({
                     token: loginRes.data.token,
