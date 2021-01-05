@@ -48,6 +48,7 @@ const PostList = () => {
                     <Link to={`/posts/${post._id}`} className="bg-white shadow-md mx-6 sm:hidden">
 
                         <div className="flex ">
+        
                             <div>
                             <img className="h-32" src={blogpen} alt="a pen" />
                         </div>
