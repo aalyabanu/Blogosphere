@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Blogosphere/static/css/main.0759322e.chunk.css",
-    "main.js": "/Blogosphere/static/js/main.39522539.chunk.js",
-    "main.js.map": "/Blogosphere/static/js/main.39522539.chunk.js.map",
+    "main.js": "/Blogosphere/static/js/main.2f1966e0.chunk.js",
+    "main.js.map": "/Blogosphere/static/js/main.2f1966e0.chunk.js.map",
     "runtime-main.js": "/Blogosphere/static/js/runtime-main.2f0a70c6.js",
     "runtime-main.js.map": "/Blogosphere/static/js/runtime-main.2f0a70c6.js.map",
     "static/js/2.5550772e.chunk.js": "/Blogosphere/static/js/2.5550772e.chunk.js",
     "static/js/2.5550772e.chunk.js.map": "/Blogosphere/static/js/2.5550772e.chunk.js.map",
     "index.html": "/Blogosphere/index.html",
-    "precache-manifest.3aec834e1e7e009faff76cd10f107daa.js": "/Blogosphere/precache-manifest.3aec834e1e7e009faff76cd10f107daa.js",
+    "precache-manifest.b20f3cb0954a0fd1d9d4b766498dd57e.js": "/Blogosphere/precache-manifest.b20f3cb0954a0fd1d9d4b766498dd57e.js",
     "service-worker.js": "/Blogosphere/service-worker.js",
     "static/css/main.0759322e.chunk.css.map": "/Blogosphere/static/css/main.0759322e.chunk.css.map",
     "static/js/2.5550772e.chunk.js.LICENSE.txt": "/Blogosphere/static/js/2.5550772e.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.2f0a70c6.js",
     "static/js/2.5550772e.chunk.js",
     "static/css/main.0759322e.chunk.css",
-    "static/js/main.39522539.chunk.js"
+    "static/js/main.2f1966e0.chunk.js"
   ]
 }
